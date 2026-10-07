@@ -1,0 +1,31 @@
+== Data tidak valid ==
+ID 9: Judul tidak boleh kosong
+
+== Buku Pemrograman ==
+- Belajar Kotlin
+- Dasar Android
+- Algoritma Praktis
+- Struktur Data
+
+== Urut harga akhir (termurah) ==
+Algoritma Praktis Rp56.000 (diskon 20%)
+UI/UX Mobile Rp75.000 (tanpa diskon)
+Belajar Kotlin Rp76.500 (diskon 10%)
+Jaringan Komputer Rp76.500 (diskon 15%)
+Basis Data Rp80.000 (tanpa diskon)
+Struktur Data Rp83.600 (diskon 5%)
+Android Dasar Rp95.000 (tanpa diskon)
+Keamanan Siber Rp99.000 (tanpa diskon)
+
+== Ringkasan ==
+Belajar Kotlin oleh Andi (2022)
+Android Dasar oleh Budi (2023)
+Algoritma Praktis oleh Citra (2020)
+Basis Data oleh Dewi (2021)
+Jaringan Komputer oleh Eko (2019)
+UI/UX Mobile oleh Fitri (2024)
+Struktur Data oleh Gita (2022)
+Keamanan Siber oleh Hadi (2023)
+
+Rata-rata harga akhir: Rp80.200
+Siap
