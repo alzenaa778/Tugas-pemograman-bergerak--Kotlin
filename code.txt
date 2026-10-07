@@ -1,0 +1,60 @@
+data class Book(
+    val id: Int,
+    val title: String,
+    val author: String,
+    val price: Int,
+    val year: Int,
+    val category: String,
+    val discount: Int? = null   // nullable: tidak semua buku diskon
+)
+
+// Validasi input: mengembalikan pesan error, atau null jika valid
+fun validate(book: Book): String? = when {
+    book.title.isBlank() -> "Judul tidak boleh kosong"
+    book.price <= 0 -> "Harga harus lebih dari 0"
+    book.discount != null && book.discount !in 1..90 -> "Diskon harus 1-90%"
+    else -> null
+}
+
+fun finalPrice(book: Book): Int =
+    book.price - (book.price * (book.discount ?: 0) / 100)
+
+fun rupiah(n: Int) = "Rp" + "%,d".format(n).replace(',', '.')
+
+fun main() {
+    val books = listOf(
+        Book(1, "Belajar Kotlin", "Andi", 85000, 2022, "Pemrograman", 10),
+        Book(2, "Android Dasar", "Budi", 95000, 2023, "Pemrograman"),
+        Book(3, "Algoritma Praktis", "Citra", 70000, 2020, "Pemrograman", 20),
+        Book(4, "Basis Data", "Dewi", 80000, 2021, "Database"),
+        Book(5, "Jaringan Komputer", "Eko", 90000, 2019, "Jaringan", 15),
+        Book(6, "UI/UX Mobile", "Fitri", 75000, 2024, "Desain"),
+        Book(7, "Struktur Data", "Gita", 88000, 2022, "Pemrograman", 5),
+        Book(8, "Keamanan Siber", "Hadi", 99000, 2023, "Jaringan"),
+        Book(9, "", "Tanpa Judul", 50000, 2023, "Uji")   // data tidak valid
+    )
+
+    // 1. Validasi
+    val (valid, invalid) = books.partition { validate(it) == null }
+    println("== Data tidak valid ==")
+    invalid.forEach { println("ID ${it.id}: ${validate(it)}") }
+
+    // 2. Filter: kategori Pemrograman
+    println("\n== Buku Pemrograman ==")
+    valid.filter { it.category == "Pemrograman" }
+        .forEach { println("- ${it.title}") }
+
+    // 3. Sort: harga akhir termurah
+    println("\n== Urut harga akhir (termurah) ==")
+    valid.sortedBy { finalPrice(it) }.forEach {
+        println("%-20s %-12s %s".format(it.title, rupiah(finalPrice(it)),
+            it.discount?.let { d -> "(diskon $d%)" } ?: "(tanpa diskon)"))
+    }
+
+    // 4. Map/transform
+    println("\n== Ringkasan ==")
+    valid.map { "${it.title} oleh ${it.author} (${it.year})" }
+        .forEach(::println)
+
+    println("\nRata-rata harga akhir: ${rupiah(valid.map { finalPrice(it) }.average().toInt())}")
+}
